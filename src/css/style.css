@@ -60,7 +60,29 @@
     }
 
     td {
-        @apply whitespace-nowrap py-1 px-3;
+        @apply font-mono whitespace-nowrap py-1 px-3;
+    }
+
+    svg {
+        @apply drop-shadow-2xl;
+    }
+
+    input {
+        @apply text-slate-800;
+    }
+
+    label {
+        @apply uppercase font-medium text-sm text-slate-400;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        @apply w-[13rem] p-1 font-bold font-mono text-emerald-300 outline-0 placeholder-slate-600 bg-slate-950 ring-1 ring-slate-700/10 shadow-sm rounded-sm;
     }
 
     .table-outer {
@@ -78,39 +100,26 @@
     .payment-overview {
         @apply font-bold uppercase text-2xl text-red-300;
     }
+
+    .loan-request-wrapper {
+        @apply p-10 w-full bg-slate-800 rounded-md shadow-xl;
+    }
+
+    .loan-request-header {
+        @apply grid grid-cols-2 place-content-center place-items-center;
+    }
+
+    .loan-request-logo {
+        @apply w-full flex items-center justify-center mx-auto;
+    }
+
+    .loan-request-inputs {
+        @apply w-full h-full grid grid-cols-2;
+    }
+
+    .loan-request-button {
+        @apply p-4 uppercase bg-slate-950 rounded-md;
+    }
 }
 
 
-svg {
-    @apply drop-shadow-2xl;
-}
-
-input {
-    @apply text-slate-800;
-}
-
-label {
-    @apply uppercase font-medium text-sm text-slate-400;
-}
-
-td {
-    @apply font-mono;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
-}
-
-input[type=number] {
-    @apply w-[13rem] p-1 font-bold font-mono text-emerald-300 outline-0 placeholder-slate-600 bg-slate-950 ring-1 ring-slate-700/10 shadow-sm rounded-sm;
-}
-
-.loan-request {
-    @apply p-10 w-full bg-slate-800 rounded-md shadow-xl;
-}
-
-.loan-request-button {
-    @apply p-4 uppercase bg-slate-950 rounded-md;
-}

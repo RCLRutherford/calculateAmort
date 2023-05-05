@@ -1,17 +1,17 @@
 import React from 'react';
 import {useSelector} from "react-redux";
-import {selectMonthlyPayment, selectResponse, selectTotalCost, selectTotalInterest} from "../store/loanStore";
+import {RootState} from "../store/loanStore";
 
 const LoanOverview = () => {
-    const response = useSelector(selectResponse);
-    const monthlyPayment = useSelector(selectMonthlyPayment);
-    const totalInterest = useSelector(selectTotalInterest);
-    const totalCost = useSelector(selectTotalCost);
+    const payments = useSelector((state: RootState) => state.loan.payments);
+    const monthlyPayment = useSelector((state: RootState) => state.loan.response?.monthlyPayment);
+    const totalInterest = useSelector((state: RootState) => state.loan.response?.totalInterest);
+    const totalCost = useSelector((state: RootState) => state.loan.response?.totalCost);
 
     return (
         <>
             <div className="flex items-center h-full">
-                {response !== null && (
+                {payments.length > 0 && (
                     <div className="space-y-7">
                         <h2>Monthly Payment</h2>
                         <span className="monthly-payment">{monthlyPayment}</span>

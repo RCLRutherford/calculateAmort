@@ -9,8 +9,12 @@ const PaymentTable = () => {
     const pageNumber = useSelector(selectPage);
 
     const getPaginatedPayments = () => {
-        return payments.length ? chunkArray(payments, 12)[pageNumber - 1] : [];
+        if (!payments) {
+            return [];
+        }
+        return chunkArray(payments!, 12)[pageNumber - 1] || [];
     };
+
 
     const chunkArray = (array: Payment[], size: number) => {
         const pages = [];
