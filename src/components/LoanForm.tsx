@@ -39,16 +39,23 @@ const LoanForm = () => {
         }
     };
 
+    const getNumericValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+        return e.target.value === null || e.target.value === '' ? 0 : parseFloat(e.target.value);
+    }
+
     const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setAmount(parseFloat(e.target.value)));
+        const value = getNumericValue(e);
+        dispatch(setAmount(value));
     };
 
     const handleRateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setRate(parseFloat(e.target.value)));
+        const value = getNumericValue(e);
+        dispatch(setRate(value));
     };
 
     const handleTermChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(setTerm(parseFloat(e.target.value)));
+        const value = getNumericValue(e);
+        dispatch(setTerm(value));
     };
 
     return (

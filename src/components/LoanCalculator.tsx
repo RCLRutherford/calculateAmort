@@ -33,20 +33,23 @@ const LoanCalculator = () => {
                 <div className="loan-request-logo">
                     <Logo width={"360"}/>
                 </div>
-                <div className="loan-request-inputs">
+                <div className="loan-request-overview">
                     <LoanOverview />
+                </div>
+                <div className="loan-request-inputs">
                     <LoanForm />
                 </div>
             </div>
             <PaymentTable />
-            <div>
+            <div className="pagination">
                 {payments !== null && chunkArray(payments!, 12).map((_, index) => (
                     <button
+                        className="pagination-button"
                         key={index + 1}
                         disabled={currentPage === index + 1}
                         onClick={() => handlePageChange(index + 1)}
                     >
-                        {index + 1}
+                        <span className="pagination-button-span">{index + 1}</span>
                     </button>
                 ))}
             </div>
