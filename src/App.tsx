@@ -1,15 +1,17 @@
 import React from 'react';
-import LoanCalculator from "./components/LoanCalculator";
-import Footer from "./components/Footer";
+import { Provider } from 'react-redux';
+import {store} from "./store/loanStore";
+import LoanCalculator from './components/LoanCalculator';
+import Footer from './components/Footer';
 
 function App() {
     return (
-        <>
-            <div className="main">
+        <Provider store={store}>
+            <main>
                 <LoanCalculator/>
-            </div>
+            </main>
             <Footer/>
-        </>
+        </Provider>
     );
 }
 
