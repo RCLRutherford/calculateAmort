@@ -16,7 +16,7 @@
     }
 
     footer {
-        @apply mx-16 p-8 flex justify-between text-slate-400 bg-slate-800 rounded-md shadow-xl;
+        @apply mx-16 mb-4 p-8 flex justify-between text-slate-400 bg-slate-800 rounded-md shadow-xl;
     }
 
     footer > div > a:hover {
@@ -33,6 +33,38 @@
 
     h3 {
         @apply font-bold uppercase text-lg text-slate-200;
+    }
+
+    table {
+       @apply min-w-full divide-y divide-gray-300;
+    }
+
+    thead {
+        @apply bg-slate-800 shadow-lg;
+    }
+
+    tr {
+        @apply py-2;
+    }
+
+    th {
+        @apply px-3 py-3.5 text-left text-sm uppercase text-gray-50;
+    }
+
+    tbody {
+        @apply bg-slate-100 text-slate-950;
+    }
+
+    td {
+        @apply whitespace-nowrap py-1 px-3;
+    }
+
+    .table-outer {
+        @apply w-full text-slate-800 rounded-md bg-slate-200 shadow-lg ring-1 ring-slate-200;
+    }
+
+    .table-inner {
+        @apply overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-md;
     }
 
     .monthly-payment {

@@ -7,6 +7,7 @@ import {Payment} from "../interfaces/Payment";
 import Logo from "./Logo";
 import ButtonCalculate from "./ButtonCalculate";
 import LoanOverview from "./LoanOverview";
+import PaymentTable from "./PaymentTable";
 
 const LoanCalculator = () => {
     const [loanAmount, setLoanAmount] = useState('');
@@ -110,42 +111,61 @@ const LoanCalculator = () => {
             <br/>
             {payments.length > 0 && (
                 <>
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Payment Number</th>
-                            <th>Amount</th>
-                            <th>Interest</th>
-                            <th>Principal</th>
-                            <th>Balance</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {getPaginatedPayments().map((payment) => (
-                            <tr key={payment.month}>
-                                <td>{payment.month}</td>
-                                <td>{payment.payment}</td>
-                                <td>{payment.interest}</td>
-                                <td>{payment.principal}</td>
-                                <td>{payment.balance}</td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
-                    <br/>
-                    <div>
-                        {chunkArray(payments, 12).map((_, index) => (
-                            <button
-                                key={index + 1}
-                                disabled={currentPage === index + 1}
-                                onClick={() => handlePageChange(index + 1)}
-                            >
-                                {index + 1}
-                            </button>
-                        ))}
+                    <div className="table-outer">
+                        <div className="table-inner">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th>Month</th>
+                                    <th>Payment</th>
+                                    <th>Interest</th>
+                                    <th>Principal</th>
+                                    <th>Balance</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {getPaginatedPayments().map((payment) => (
+                                    <tr key={payment.month} className={payment.month % 2 === 0 ? 'bg-slate-200' : ''}>
+                                        <td>{payment.month}</td>
+                                        <td>{payment.payment}</td>
+                                        <td>{payment.interest}</td>
+                                        <td>{payment.principal}</td>
+                                        <td>{payment.balance}</td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </table>
+                            <br/>
+                            <div>
+                                {chunkArray(payments, 12).map((_, index) => (
+                                    <button
+                                        key={index + 1}
+                                        disabled={currentPage === index + 1}
+                                        onClick={() => handlePageChange(index + 1)}
+                                    >
+                                        {index + 1}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </>
             )}
+            {payments.length > 0 && (
+                <PaymentTable payments={payments} pageNumber={currentPage}/>
+
+            )}
+            <div>
+                {chunkArray(payments, 12).map((_, index) => (
+                    <button
+                        key={index + 1}
+                        disabled={currentPage === index + 1}
+                        onClick={() => handlePageChange(index + 1)}
+                    >
+                        {index + 1}
+                    </button>
+                ))}
+            </div>
         </div>
     );
 }
