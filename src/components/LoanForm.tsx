@@ -1,36 +1,54 @@
 import React from 'react';
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../store/loanStore";
 import axios from "axios";
 
-import {setAmount, selectAmount, setRate, selectRate, setTerm, selectTerm} from "../store/loanStore";
-import {setResponse, setPayments, setPage} from "../store/loanStore";
+import {setAmount, setRate, setTerm } from "../store/loanStore";
+import {setResponse, setMonthlyPayment, setTotalInterest, setTotalCost, setPayments, setPage} from "../store/loanStore";
 
 import ButtonCalculate from "./ButtonCalculate";
 import {LoanRequest} from "../interfaces/LoanRequest";
 import {LoanResponse} from "../interfaces/LoanResponse";
 
 const LoanForm = () => {
-    const amount = useSelector(selectAmount);
-    const rate = useSelector(selectRate);
-    const term = useSelector(selectTerm);
+    const dispatch = useDispatch();
+
+    let amount = useSelector((state: RootState) => state.loan.amount);
+    let rate = useSelector((state: RootState) => state.loan.rate);
+    let term = useSelector((state: RootState) => state.loan.term);
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const loanRequest: LoanRequest = {
-            amount: parseFloat(amount),
-            rate: parseFloat(rate),
-            term: parseInt(term) * 12,
+            amount: amount,
+            rate: rate,
+            term: term * 12,
         };
+
         try {
             const response = await axios.post<LoanResponse>('https://loanshark-api.azurewebsites.net/api/loans', loanRequest);
-            setResponse(response.data);
-            setPayments(response.data.payments);
-            setPage(1);
-            console.log(response.data);
+            dispatch(setResponse(response.data));
+            dispatch(setPayments(response.data.payments));
+            dispatch(setMonthlyPayment(response.data.monthlyPayment));
+            dispatch(setTotalInterest(response.data.totalInterest));
+            dispatch(setTotalCost(response.data.totalCost));
+            dispatch(setPage(1));
         } catch (error) {
             console.error(error);
         }
+    };
+
+    const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(setAmount(parseFloat(e.target.value)));
+    };
+
+    const handleRateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(setRate(parseFloat(e.target.value)));
+    };
+
+    const handleTermChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(setTerm(parseFloat(e.target.value)));
     };
 
     return (
@@ -43,9 +61,8 @@ const LoanForm = () => {
                     </label>
                     <input
                         type="number"
-                        step="0.01"
                         value={amount}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAmount(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleAmountChange(e)}
                         required
                         placeholder="50000.00"
                     />
@@ -54,9 +71,8 @@ const LoanForm = () => {
                     </label>
                     <input
                         type="number"
-                        step="0.01"
                         value={rate}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRate(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleRateChange(e)}
                         required
                         placeholder="5.5"
                     />
@@ -66,7 +82,7 @@ const LoanForm = () => {
                     <input
                         type="number"
                         value={term}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTerm(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleTermChange(e)}
                         required
                         placeholder="1"
                     />
