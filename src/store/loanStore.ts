@@ -20,9 +20,9 @@ interface LoanState {
 }
 
 const initialState: LoanState = {
-    amount: 50000,
+    amount: 50000.0,
     rate: 5.5,
-    term: 1,
+    term: 2,
     monthlyPayment: null,
     totalInterest: null,
     totalCost: null,
