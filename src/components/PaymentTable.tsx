@@ -1,14 +1,12 @@
-import React, {useState} from 'react';
+import React from 'react';
+import {useSelector} from "react-redux";
 import {Payment} from "../interfaces/Payment";
+import {selectPage, selectPayments} from "../store/loanStore";
 
-interface PaymentTableProps {
-    payments: Payment[];
-    pageNumber: number;
-}
+const PaymentTable = () => {
 
-const PaymentTable = ({payments, pageNumber}: PaymentTableProps) => {
-
-    const [currentPage, setCurrentPage] = useState(pageNumber);
+    const payments = useSelector(selectPayments);
+    const pageNumber = useSelector(selectPage);
 
     const getPaginatedPayments = () => {
         return payments.length ? chunkArray(payments, 12)[pageNumber - 1] : [];
@@ -22,52 +20,37 @@ const PaymentTable = ({payments, pageNumber}: PaymentTableProps) => {
         return pages;
     };
 
-    const handlePageChange = (newPage: number) => {
-        // setCurrentPage(newPage);
-        setCurrentPage(newPage);
-    };
-
     return (
-        // <>
-            <div className="table-outer">
-                <div className="table-inner">
-                    <table>
-                        <thead>
-                        <tr>
-                            <th>Month</th>
-                            <th>Payment</th>
-                            <th>Interest</th>
-                            <th>Principal</th>
-                            <th>Balance</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {getPaginatedPayments().map((payment) => (
-                            <tr key={payment.month} className={payment.month % 2 === 0 ? 'bg-slate-200' : ''}>
-                                <td>{payment.month}</td>
-                                <td>{payment.payment}</td>
-                                <td>{payment.interest}</td>
-                                <td>{payment.principal}</td>
-                                <td>{payment.balance}</td>
+        <>
+            {payments.length > 0 && (
+                <div className="table-outer">
+                    <div className="table-inner">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Month</th>
+                                <th>Payment</th>
+                                <th>Interest</th>
+                                <th>Principal</th>
+                                <th>Balance</th>
                             </tr>
-                        ))}
-                        </tbody>
-                    </table>
-                    <br/>
-                    <div>
-                        {chunkArray(payments, 12).map((_, index) => (
-                            <button
-                                key={index + 1}
-                                disabled={currentPage === index + 1}
-                                onClick={() => handlePageChange(index + 1)}
-                            >
-                                {index + 1}
-                            </button>
-                        ))}
+                            </thead>
+                            <tbody>
+                            {getPaginatedPayments().map((payment: Payment) => (
+                                <tr key={payment.month} className={payment.month % 2 === 0 ? 'bg-slate-200' : ''}>
+                                    <td>{payment.month}</td>
+                                    <td>{payment.payment}</td>
+                                    <td>{payment.interest}</td>
+                                    <td>{payment.principal}</td>
+                                    <td>{payment.balance}</td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </div>
-        // </>
+            )}
+        </>
     );
 };
 
