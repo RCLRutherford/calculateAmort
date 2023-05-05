@@ -1,46 +1,149 @@
-# Getting Started with Create React App
+<div align="center">
+<img src="images/logo.svg" width="50%" alt="Logo" />
+</div>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## POST a request, 🪄 get some loan details 🪄
 
-## Available Scripts
+Loan Shark API lets you estimate the true cost of a loan. Send the amount to borrow, the interest rate
+and the number of payments and get a breakdown of what you will pay.
 
-In the project directory, you can run:
+Written in <a href="https://go.dev" target="_blank">Go</a> deployed to <a href="https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview">Azure Functions</a>,
+you can interact with the live function at [https://loanshark-api.azurewebsites.net/api/loans](https://loanshark-api.azurewebsites.net/api/loans)
 
-### `npm start`
+### Methods
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Loan Shark API only accepts a `POST` request to a valid endpoint, `/api/loans`. 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+### 🌐 Loan Request Endpoint
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Send a `POST` request to the `https://loanshark-api.azurewebsites.net/api/loans` endpoint with a JSON body with the following options.
 
-### `npm run build`
+Example Request:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```json
+{
+    "amount": 50000,
+    "rate": 5.5,
+    "term": 12
+}
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Example Response:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```json
+{
+    "loanAmount": "$50000.00",
+    "loanRate": "5.50",
+    "monthlyPayment": "$4291.84",
+    "totalInterest": "$1502.07",
+    "totalCost": "$51502.07",
+    "payments": [
+        {
+            "month": 1,
+            "payment": "$4291.84",
+            "principal": "$4062.67",
+            "interest": "$229.17",
+            "balance": "$45937.33"
+        },
+        {
+            "month": 2,
+            "payment": "$4291.84",
+            "principal": "$4081.29",
+            "interest": "$210.55",
+            "balance": "$41856.03"
+        },
+        {
+            "month": 3,
+            "payment": "$4291.84",
+            "principal": "$4100.00",
+            "interest": "$191.84",
+            "balance": "$37756.04"
+        },
+        {
+            "month": 4,
+            "payment": "$4291.84",
+            "principal": "$4118.79",
+            "interest": "$173.05",
+            "balance": "$33637.24"
+        },
+        {
+            "month": 5,
+            "payment": "$4291.84",
+            "principal": "$4137.67",
+            "interest": "$154.17",
+            "balance": "$29499.58"
+        },
+        {
+            "month": 6,
+            "payment": "$4291.84",
+            "principal": "$4156.63",
+            "interest": "$135.21",
+            "balance": "$25342.94"
+        },
+        {
+            "month": 7,
+            "payment": "$4291.84",
+            "principal": "$4175.68",
+            "interest": "$116.16",
+            "balance": "$21167.26"
+        },
+        {
+            "month": 8,
+            "payment": "$4291.84",
+            "principal": "$4194.82",
+            "interest": "$97.02",
+            "balance": "$16972.44"
+        },
+        {
+            "month": 9,
+            "payment": "$4291.84",
+            "principal": "$4214.05",
+            "interest": "$77.79",
+            "balance": "$12758.39"
+        },
+        {
+            "month": 10,
+            "payment": "$4291.84",
+            "principal": "$4233.36",
+            "interest": "$58.48",
+            "balance": "$8525.02"
+        },
+        {
+            "month": 11,
+            "payment": "$4291.84",
+            "principal": "$4252.77",
+            "interest": "$39.07",
+            "balance": "$4272.26"
+        },
+        {
+            "month": 12,
+            "payment": "$4291.84",
+            "principal": "$4272.26",
+            "interest": "$19.58",
+            "balance": "$0.00"
+        }
+    ]
+}
+```
 
-### `npm run eject`
+### Example using curl
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```cmd
+curl -X POST http://loanshark-api.azurewebsites.net/api/loans -d '{"amount": 50000, "rate": 5.5, "term": 12}'
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Options
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+`amount`: 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The amount being borrowed, if the loan is for $50,000.00, then pass `50000` or `50000.00`.
 
-## Learn More
+`rate`: 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The annual interest rate of the loan, if the interest rate is 5.5%, then pass `5.5`.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+`term`: 
+
+The number of months the loan is for. For example a loan to be paid over one year would be `12`.
+
