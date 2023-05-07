@@ -1,12 +1,12 @@
 import React from 'react';
 import {useSelector} from "react-redux";
 import {Payment} from "../interfaces/Payment";
-import {selectPage, selectPayments} from "../store/loanStore";
+import {RootState} from "../store/loanStore";
 
 const PaymentTable = () => {
 
-    const payments = useSelector(selectPayments);
-    const pageNumber = useSelector(selectPage);
+    const payments = useSelector((state: RootState) => state.loan.payments);
+    const pageNumber = useSelector((state: RootState) => state.loan.page);
 
     const getPaginatedPayments = () => {
         if (!payments) {

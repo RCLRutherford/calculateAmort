@@ -69,43 +69,6 @@ export const loanSlice = createSlice({
     },
 });
 
-export const selectAmount = (state: { loan: LoanState }) => state.loan.amount;
-
-export const selectRate = (state: { loan: LoanState }) => state.loan.rate;
-
-export const selectTerm = (state: { loan: LoanState }) => state.loan.term;
-
-export const selectRequest = (state: { loan: LoanState }) => {
-    return state.loan.request !== null ? state.loan.request : null;
-}
-
-export const selectResponse = (state: { loan: LoanState }) => {
-    if (state.loan.response) {
-        return state.loan.response;
-    } else {
-        return null;
-    }
-    // return state.loan.response !== null ? state.loan.response : null;
-}
-
-export const selectMonthlyPayment = (state: { loan: LoanState }) => {
-    return state.loan.monthlyPayment !== null ? state.loan.monthlyPayment : null;
-}
-
-export const selectTotalInterest = (state: { loan: LoanState }) => state.loan.totalInterest;
-
-export const selectTotalCost = (state: { loan: LoanState }) => state.loan.totalCost;
-
-export const selectPayments = (state: { loan: LoanState }) => {
-    if (state.loan.response && state.loan.payments) {
-        return state.loan.payments;
-    } else {
-        return [] as Payment[];
-    }
-};
-
-export const selectPage = (state: { loan: LoanState }) => state.loan.page;
-
 export const {
     setAmount,
     setRate,
