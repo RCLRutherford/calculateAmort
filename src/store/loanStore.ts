@@ -29,7 +29,7 @@ const initialState: LoanState = {
     request: null,
     response: null,
     payments: [],
-    page: 1
+    page: 1,
 };
 
 export const loanSlice = createSlice({

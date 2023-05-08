@@ -1,14 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../store/loanStore";
 import axios from "axios";
 
-import {setAmount, setRate, setTerm } from "../store/loanStore";
+import {setAmount, setRate, setTerm} from "../store/loanStore";
 import {setResponse, setMonthlyPayment, setTotalInterest, setTotalCost, setPayments, setPage} from "../store/loanStore";
 
 import ButtonCalculate from "./ButtonCalculate";
 import {LoanRequest} from "../interfaces/LoanRequest";
 import {LoanResponse} from "../interfaces/LoanResponse";
+import FetchingModal from "./FetchingModal";
 
 const LoanForm = () => {
     const dispatch = useDispatch();
@@ -17,8 +18,12 @@ const LoanForm = () => {
     let rate = useSelector((state: RootState) => state.loan.rate);
     let term = useSelector((state: RootState) => state.loan.term);
 
+    const [isFetching, setIsFetching] = useState(false);
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        setIsFetching(true);
 
         const loanRequest: LoanRequest = {
             amount: amount,
@@ -28,14 +33,20 @@ const LoanForm = () => {
 
         try {
             const response = await axios.post<LoanResponse>('https://loanshark-api.azurewebsites.net/api/loans', loanRequest);
-            dispatch(setResponse(response.data));
-            dispatch(setPayments(response.data.payments));
-            dispatch(setMonthlyPayment(response.data.monthlyPayment));
-            dispatch(setTotalInterest(response.data.totalInterest));
-            dispatch(setTotalCost(response.data.totalCost));
-            dispatch(setPage(1));
+
+            setTimeout(() => {
+                dispatch(setResponse(response.data));
+                dispatch(setPayments(response.data.payments));
+                dispatch(setMonthlyPayment(response.data.monthlyPayment));
+                dispatch(setTotalInterest(response.data.totalInterest));
+                dispatch(setTotalCost(response.data.totalCost));
+                dispatch(setPage(1));
+                setIsFetching(false);
+            }, 750);
+
         } catch (error) {
             console.error(error);
+            setIsFetching(false);
         }
     };
 
@@ -60,6 +71,9 @@ const LoanForm = () => {
 
     return (
         <div>
+            {isFetching && (
+                <FetchingModal />
+            )}
             <form onSubmit={handleSubmit}>
                 <h1>Estimate a loan</h1>
                 <div className="grid grid-cols-1">
