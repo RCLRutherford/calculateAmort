@@ -56,19 +56,22 @@
     h1 {
         /*@apply my-10 font-bold uppercase text-4xl text-slate-100;*/
         /*@apply my-10 font-bold uppercase text-4xl text-[#52ABE7];*/
-        @apply my-10 font-bold uppercase text-4xl text-[#97D5FF];
+        /*@apply my-10 font-bold uppercase text-4xl text-[#97D5FF];*/
+        @apply my-10 font-bold uppercase text-4xl text-[#D9F0FF];
     }
 
     h2 {
         /*@apply font-bold uppercase text-3xl text-slate-200;*/
         /*@apply font-bold uppercase text-3xl text-[#52ABE7];*/
-        @apply font-bold uppercase text-3xl text-[#97D5FF];
+        /*@apply font-bold uppercase text-3xl text-[#97D5FF];*/
+        @apply font-bold uppercase text-3xl text-[#D9F0FF];
     }
 
     h3 {
         /*@apply font-bold uppercase text-lg text-slate-200;*/
         /*@apply font-bold uppercase text-lg text-[#52ABE7];*/
-        @apply font-bold uppercase text-lg text-[#97D5FF];
+        /*@apply font-bold uppercase text-lg text-[#97D5FF];*/
+        @apply font-bold uppercase text-lg text-[#D9F0FF];
     }
 
     table {
