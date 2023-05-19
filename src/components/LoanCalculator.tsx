@@ -31,16 +31,16 @@ const LoanCalculator = () => {
         <div className="loan-request-wrapper">
             <div className="loan-request-header">
                 <div className="loan-request-logo">
-                    <Logo width={"360"}/>
+                    <Logo/>
                 </div>
                 <div className="loan-request-overview">
-                    <LoanOverview />
+                    <LoanOverview/>
                 </div>
                 <div className="loan-request-inputs">
-                    <LoanForm />
+                    <LoanForm/>
                 </div>
             </div>
-            <PaymentTable />
+            <PaymentTable/>
             <div className="pagination">
                 {payments !== null && chunkArray(payments!, 12).map((_, index) => (
                     <button

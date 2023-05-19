@@ -41,36 +41,22 @@
     }
 
     main {
-        /*@apply m-16 max-w-7xl flex items-center justify-center;*/
-        @apply mx-auto mt-12 max-w-6xl flex items-center justify-center;
+        @apply mx-auto px-4 mt-12 max-w-6xl flex items-center justify-center;
     }
 
-    footer {
-        @apply mx-auto mt-8 mb-4 max-w-6xl p-8 flex justify-between text-slate-400 bg-slate-800 rounded-md shadow-xl;
-    }
-
-    footer > div > a:hover {
+    footer > div > div > a:hover {
         @apply transition-colors delay-100 ease-in-out text-slate-50;
     }
 
     h1 {
-        /*@apply my-10 font-bold uppercase text-4xl text-slate-100;*/
-        /*@apply my-10 font-bold uppercase text-4xl text-[#52ABE7];*/
-        /*@apply my-10 font-bold uppercase text-4xl text-[#97D5FF];*/
-        @apply my-10 font-bold uppercase text-4xl text-[#D9F0FF];
+        @apply my-10 font-bold uppercase text-2xl text-center md:text-3xl lg:text-4xl text-[#D9F0FF];
     }
 
     h2 {
-        /*@apply font-bold uppercase text-3xl text-slate-200;*/
-        /*@apply font-bold uppercase text-3xl text-[#52ABE7];*/
-        /*@apply font-bold uppercase text-3xl text-[#97D5FF];*/
-        @apply font-bold uppercase text-3xl text-[#D9F0FF];
+        @apply font-bold uppercase text-xl text-[#D9F0FF] lg:text-3xl;
     }
 
     h3 {
-        /*@apply font-bold uppercase text-lg text-slate-200;*/
-        /*@apply font-bold uppercase text-lg text-[#52ABE7];*/
-        /*@apply font-bold uppercase text-lg text-[#97D5FF];*/
         @apply font-bold uppercase text-lg text-[#D9F0FF];
     }
 
@@ -117,10 +103,11 @@
     }
 
     input[type=number] {
-        /*@apply w-[13rem] p-1 font-bold font-mono text-emerald-300 outline-0 placeholder-slate-600 bg-slate-950 ring-1 ring-slate-700/10 shadow-sm rounded-sm;*/
-        /*@apply w-[13rem] p-1 font-bold font-mono text-emerald-200 outline-0 placeholder-slate-600 bg-slate-950 ring-1 ring-slate-700/10 shadow-sm rounded-sm;*/
-        /*@apply w-[13rem] p-1 font-bold font-mono text-[#D4EEFF] outline-0 placeholder-slate-600 bg-slate-950 ring-1 ring-slate-700/10 shadow-sm rounded-sm;*/
         @apply w-[13rem] p-1 font-bold font-mono text-slate-50 outline-0 placeholder-slate-600 bg-slate-950 ring-1 ring-slate-700/10 shadow-sm rounded-sm;
+    }
+
+    .app-logo {
+        @apply w-[160px] md:w-[360px];
     }
 
     .table-outer {
@@ -132,12 +119,10 @@
     }
 
     .monthly-payment {
-        /*@apply font-bold uppercase text-6xl text-red-500;*/
-        @apply font-bold uppercase text-6xl text-slate-100;
+        @apply font-bold uppercase text-3xl text-slate-100 lg:text-6xl;
     }
 
     .payment-overview {
-        /*@apply font-bold uppercase text-2xl text-red-300;*/
         @apply font-bold uppercase text-2xl text-slate-200;
     }
 
@@ -146,7 +131,7 @@
     }
 
     .loan-request-header {
-        @apply grid grid-cols-3 place-content-center place-items-center;
+        @apply grid grid-cols-1 md:grid-cols-3 place-content-center place-items-center;
     }
 
     .loan-request-logo {

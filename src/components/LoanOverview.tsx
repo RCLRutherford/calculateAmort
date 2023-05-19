@@ -12,7 +12,7 @@ const LoanOverview = () => {
         <>
             <div className="flex items-center h-full">
                 {payments.length > 0 && (
-                    <div className="space-y-8">
+                    <div className="space-y-8 text-center md:text-left">
                         <h2>Monthly Payment</h2>
                         <span className="monthly-payment">{monthlyPayment}</span>
                         <h3>Total Interest</h3>

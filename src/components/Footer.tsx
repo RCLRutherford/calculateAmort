@@ -7,13 +7,22 @@ const date = new Date().getFullYear();
 
 const Footer = () => {
     return (
-        <footer>
-            <div className="flex items-center">
-                &copy; Jeremy Novak {date}
+        <footer className="mx-auto max-w-6xl">
+            <div className="hidden md:flex p-4 text-zinc-900 items-center justify-between">
+                <div className="items-center justify-between">
+                    &copy; Jeremy Novak {date}
+                </div>
+                <ButtonGitHub url="https://github.com/jgnovakdev/loanshark"/>
+                <Socials/>
             </div>
-            <ButtonGitHub url="https://github.com/jgnovakdev/loanshark"/>
-            <Socials/>
+            <div className="block md:hidden text-zinc-900">
+                <div className="flex mb-2 p-4 items-center justify-between">
+                    &copy; Jeremy Novak {date}
+                    <Socials/>
+                </div>
+            </div>
         </footer>
+
     );
 };
 

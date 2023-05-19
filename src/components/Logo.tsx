@@ -1,15 +1,10 @@
 import * as React from "react"
 
-// const SvgLogo = (props) => (
 const Logo = ({ width = "100%", height = "100%", scale = 1}) => {
-
-    const scaledWidth = typeof width === "number" ? width * scale : width;
-    const scaledHeight = typeof height === "number" ? height * scale : height;
 
     return (
         <svg
-            width={scaledWidth}
-            height={scaledHeight}
+            className="app-logo"
             viewBox="0 0 3000 3000"
             xmlns="http://www.w3.org/2000/svg"
             xmlSpace="preserve"
